@@ -1,26 +1,19 @@
 # RELE_FOCO
-RELE MAS FOCO Y MAS THINGER.IO #include <WiFi.h>
-#include <ThingerESP32.h>
-/* ========= THINGER.IO ========= */
-#define USERNAME "majochaca"
-#define DEVICE_ID "foco"
-#define DEVICE_CREDENTIAL "123456"
-/* ========= WIFI ========= */
-#define SSID "MECATRONICA_3ABC"
-#define SSID_PASSWORD "MEC2025@." // Reemplaza por tu clave
-/* ========= LED ========= */
-#define RELE 2 // RELE interno del ESP32 (GPIO2)
-ThingerESP32 thing(USERNAME, DEVICE_ID, DEVICE_CREDENTIAL);
+int Relay =4;  
+
 void setup() {
- Serial.begin(115200);
- delay(1000);
- pinMode(RELE, OUTPUT);
- digitalWrite(RELE, LOW);
- thing.add_wifi(SSID, SSID_PASSWORD);
- // Recurso para control desde Thinger (Switch)
- thing["RELE"] << digitalPin(RELE);
- Serial.println("ESP32 iniciado. Revisa Thinger.io (ONLINE).");
+  // put your setup code here, to run once:
+  Serial.begin(9600);
+  Serial.println("Hello, ESP32!");
+  pinMode(Relay, OUTPUT);
 }
+
 void loop() {
- thing.handle();
+  // put your main code here, to run repeatedly:
+  digitalWrite(Relay, HIGH); // Turn On the LED
+  if(digitalRead(Relay)==1){ Serial.println("ON");}
+  delay(500); // this speeds up the simulation
+  digitalWrite(Relay, LOW);  // Turn Off the LED
+  if(digitalRead(Relay)==0){ Serial.println("OFF");}
+  delay(500);
 }
